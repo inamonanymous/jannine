@@ -6,17 +6,20 @@
   Description:
   `	Database initials
  */
-  $server   = 'localhost';
-  $username = 'root';
-  $password = 'root';
-  $dbname   = 'lms';
-  $con      = mysql_connect($server, $username, $password);
 
-  if(!$con){
-      die('Couldn\'t established connection to server because '.mysql_error()); 
-  }else{
-      if(!mysql_select_db($dbname)){
-			echo 'Required database not found. Please export the db file into database';
-      }
-  }
+$server = 'localhost';
+$username = 'root';
+$password = 'password';
+$dbname = 'lms';
+
+$con = mysqli_connect($server, $username, $password, $dbname);
+
+if (!$con) {
+    die('Couldn\'t establish connection to server because ' . mysqli_connect_error());
+} else {
+    echo 'Connected to the database successfully.';
+    // Additional code logic here
+}
+
+
 ?>

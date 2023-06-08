@@ -9,14 +9,14 @@
 		$gender    = $_POST['genderRadios'];
 		/* check if the user already exists with the userid */
 		$query     = 'SELECT `userid` FROM `users` WHERE `userid`="'.$userid.'"';
-		$result    = mysql_query($query);
-		if(mysql_num_rows($result) > 0){
+		$result    = mysqli_query($con,$query);
+		if(mysqli_num_rows($result) > 0){
 			$user_status = 'exists';
 		}else{
 			/* insert into user table */
 			$query     = 'INSERT INTO `users`(`userid`, `firstname`, `lastname`, `email`, `gender`, `usertype`) 
 							VALUES ("'.$userid.'","'.$firstname.'","'.$lastname.'","'.$email.'",'.$gender.','.$usertype.')';
-			if(mysql_query($query)){
+			if(mysqli_query($con,$query)){
 				$create_status = true;
 			}else{
 				$create_status = false;

@@ -6,18 +6,17 @@
 		$author = $_POST['author'];
 		$isbnno = $_POST['isbnno'];
 		$bookselfno = $_POST['bookselfno'];
-		$quantity   = $_POST['quantity'];
-
+		
 		/* check if the book already exists with the isbnno */
-		$query     = 'SELECT `isbnno` FROM `books` WHERE `isbnno`="'.$isbnno.'"';
-		$result    = mysql_query($query);
-		if(mysql_num_rows($result) > 0){
+		$query     = 'SELECT `isbn` FROM `books_1` WHERE `isbn`="'.$isbnno.'"';
+		$result    = mysqli_query($con,$query);
+		if(mysqli_num_rows($result) > 0){
 			$book_status = 'exists';
 		}else{
 			/* insert book details into books table */
-			$query = 'INSERT INTO `books`(`title`, `category`, `author`, `isbnno`, `bookselfno`,`quantity`) 
-						VALUES ("'.$title.'","'.$category.'","'.$author.'","'.$isbnno.'","'.$bookselfno.'",'.$quantity.')';
-			if(mysql_query($query)){
+			$query = 'INSERT INTO `books_1`(`title`, `recommendedAge`, `author`, `isbn`, `price`) 
+						VALUES ("'.$title.'","'.$category.'","'.$author.'","'.$isbnno.'","'.$bookselfno.'")';
+			if(mysqli_query($con,$query)){
 				$addbook_status = true;
 			}else{
 				$addbook_status = false;
@@ -76,9 +75,9 @@
 		      </div>
 		    </div>
 		    <div class="form-group">
-		      <label for="inputCategory" class="col-lg-2 control-label">Category</label>
+		      <label for="inputCategory" class="col-lg-2 control-label">Recommended Age</label>
 		      <div class="col-lg-10">
-		        <input class="form-control" id="inputCategory" name="category" placeholder="Category" type="text">
+		        <input class="form-control" id="inputCategory" name="category" placeholder="Age" type="text">
 		    </div>
 		    </div>
 		    <div class="form-group">
@@ -94,16 +93,11 @@
 		    </div>
 		    </div>
 		    <div class="form-group">
-		      <label for="inputBookSelfNo" class="col-lg-2 control-label">Bookself No.</label>
+		      <label for="inputBookSelfNo" class="col-lg-2 control-label">Price</label>
 		      <div class="col-lg-10">
-		        <input class="form-control" id="inputBookSelfNo" name="bookselfno" placeholder="Bookself No." type="text">
+		        <input class="form-control" id="inputBookSelfNo" name="bookselfno" placeholder="$" type="text">
 		    </div>
-		    </div>
-		     <div class="form-group">
-		      <label for="inputQuantity" class="col-lg-2 control-label">Bookself No.</label>
-		      <div class="col-lg-10">
-		        <input class="form-control" id="inputQuantity" name="quantity" placeholder="Quantity" type="number">
-		    </div>
+		    
 		    </div>
 		     <div class="form-group">
 		      <div class="col-lg-10 col-lg-offset-2">

@@ -1,4 +1,5 @@
 <?php 
+include('include/connection.php');
 	/* check login status */
 	session_start();
 	if(isset($_SESSION['username'])){
@@ -32,7 +33,7 @@
 		 	}
 
 		 	if(isset($_GET['sub'])){
-		 		 $subpage = mysql_real_escape_string($_GET['sub']); //protected from sql injection
+		 		 $subpage = mysqli_real_escape_string($con, $_GET['sub']); //protected from sql injection
 		 		  switch($subpage){
 			      case 'book_issue':
 			        include('book_issue.php');

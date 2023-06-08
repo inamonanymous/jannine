@@ -1,8 +1,8 @@
 <?php
   /* get all registered users */
   include('include/connection.php');
-  $query = "SELECT `book_id`, `title`, `category`, `author`, `isbnno`, `bookselfno` FROM `books`";
-  $result = mysql_query($query);
+  $query = "SELECT `id`, `title`, `recommendedAge`, `author`, `isbn`, `price` FROM `books_1`";
+  $result = mysqli_query($con,$query);
   if(isset($_GET['status'])){
     $delete_status = $_GET['status'];
   }
@@ -51,22 +51,22 @@
       </thead>
       <tbody>
       <?php
-      while($row = mysql_fetch_array($result)){
+      while($row = mysqli_fetch_array($result)){
       ?>
         <tr>
-          <td><?php echo $row['book_id'];?></td>
+          <td><?php echo $row['id'];?></td>
           <td><?php echo $row['title'];?></td>
-          <td><?php echo $row['category'];?></td>
+          <td><?php echo $row['recommendedAge'];?></td>
           <td><?php echo $row['author'];?></td>
-          <td><?php echo $row['isbnno'];?></td>
-          <td><?php echo $row['bookselfno'];?></td>
-          <td><a href="delete_book.php?delete=<?php echo $row['isbnno'];?>" class="btn btn-primary btn-xs">Delete</a></td>
+          <td><?php echo $row['isbn'];?></td>
+          <td><?php echo $row['price'];?></td>
+          <td><a href="delete_book.php?delete=<?php echo $row['isbn'];?>" class="btn btn-primary btn-xs">Delete</a></td>
           <td><a href="#" class="btn btn-info btn-xs">Edit</a></td>
         </tr>
         <?php
       } /* ends while */
       	/* check if the list is empty */
-      	if(mysql_num_rows($result) == 0){
+      	if(mysqli_num_rows($result) == 0){
       	?>
       	<tr>
       	<td colspan="8">No book found</td>

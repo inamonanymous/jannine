@@ -1,0 +1,1 @@
+<h2 class="footer-head">&copy; Abenojar, Repana, Versosa | Library Mangement System</h2>

@@ -1,8 +1,8 @@
 <?php
 	include('include/connection.php');
 	$query = 'SELECT `issueno`, `isbnno`, `userid`, date(`issueddate`) AS `issueddate` FROM `issuedbook`';
-	$result = mysql_query($query);
-	if(mysql_num_rows($result)>0){
+	$result = mysqli_query($con,$query);
+	if(mysqli_num_rows($result)>0){
 		$issued = true;
 	}else{
 		$issued = false;
@@ -25,7 +25,7 @@
 		  <?php
 		  if(isset($issued)){
 		  	if($issued){
-		  		while($row = mysql_fetch_array($result)){
+		  		while($row = mysqli_fetch_array($result)){
 		  ?>
 		    <tr>
 		      <td><?php echo $row['issueno'];?></td>

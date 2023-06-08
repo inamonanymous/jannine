@@ -5,8 +5,8 @@
 		/* fetch borrowed list of user*/
 		$query = 'SELECT `issueno`, `isbnno`, `userid`, date(`issueddate`) AS `issueddate` FROM `issuedbook` WHERE `userid` = "'.$userid.'"';
 		
-		$result = mysql_query($query);
-		if(mysql_num_rows($result)>0){
+		$result = mysqli_query($con,$query);
+		if(mysqli_num_rows($result)>0){
 			$borrow_status = true;
 		}else{
 			$borrow_status = false;

@@ -2,7 +2,7 @@
 	/* get all registered users */
 	include('include/connection.php');
 	$query = "SELECT `userid`, `firstname`, `lastname`, `email`, `gender`, `usertype` FROM `users`";
-	$result = mysql_query($query);
+	$result = mysqli_query($con,$query);
 	if(isset($_GET['status'])){
 		$delete_status = $_GET['status'];
 	}
@@ -51,7 +51,7 @@
 		  </thead>
 		  <tbody>
 		  <?php
-		  while($row = mysql_fetch_array($result)){
+		  while($row = mysqli_fetch_array($result)){
 		  ?>
 		    <tr>
 		      <td><?php echo $row['userid'];?></td>

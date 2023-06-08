@@ -1,4 +1,6 @@
 <?php
+
+include('include/connection.php');
   /*navigation activator*/
     $home             = '';
     $administrator    = '';
@@ -15,7 +17,7 @@
     $setting          = '';
     $change_password  = '';
   if(isset($_GET['page'])){
-    $page = mysql_real_escape_string($_GET['page']); //protected from sql injection
+    $page = mysqli_real_escape_string($con, $_GET['page']); //protected from sql injection
     switch($page){
       case 'home':
         $home = 'class="active"';
@@ -38,7 +40,7 @@
     }
   }
   if(isset($_GET['sub'])){
-    $subpage             = mysql_real_escape_string($_GET['sub']); //protected from sql injection
+    $subpage             = mysqli_real_escape_string($con,$_GET['sub']); //protected from sql injection
     $activator        = 'class="active_sub"';
     switch($subpage){
       case 'book_issue':
@@ -93,7 +95,7 @@
     <ul class="nav navbar-nav">
       <li <?php echo $home; ?> ><a href="index.php?page=home">Home</a></li>
       <li class="dropdown">
-        <a href="#" class="dropdown-toggle <?php echo $inventory;?>" data-toggle="dropdown">Inventory<b class="caret"></b></a>
+        <a href="#" class="dropdown-toggle <?php echo $Inventory;?>" data-toggle="dropdown">Inventory<b class="caret"></b></a>
         <ul class="dropdown-menu">
           <li><a href="?page=inventory&sub=add_book" <?php echo $add_book;?> >Add Book</a></li>
           <li><a href="?page=inventory&sub=manage_books" <?php echo $manage_books;?> >Manage Books</a></li>

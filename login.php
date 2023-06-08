@@ -3,26 +3,32 @@ if(isset($_POST['login_submit'])){
 	include('include/connection.php');
 	$username = $_POST['username'];
 	$password = $_POST['password'];
-	$enc_password = md5($password);
-	/* query into database */
-	$query  = "SELECT `username`, `password` FROM `user_credentials` WHERE 1";
 	
-	$result = mysql_query($query);
-	$login_status = 'failed';
-	while($row = mysql_fetch_array($result)){
-		/* login successful, set session and proceed to homepage */
-		if($row['username'] == $username && $row['password'] == $enc_password){
-			$login_status = 'success';
-			session_start();
-			$_SESSION['username'] = $username;
+	/* query into database */
+	$query = "SELECT `username`, `password` FROM `user_credentials` WHERE 1";
+	$result = mysqli_query($con, $query);
+
+	if ($result) {
+		$login_status = 'failed';
+		
+		while ($row = mysqli_fetch_array($result)) {
+			if ($row['username'] == $username && $row['password'] == $password) {
+				$login_status = 'success';
+				session_start();
+				$_SESSION['username'] = $username;
+			}
 		}
-	}
-	if($login_status == 'success'){
-		header("Location: index.php?page=home");
-	}else{
-		$error = 'Login failed!';
-		/* login failed, redirect to login page with error */
-	}
+		
+		if ($login_status == 'success') {
+			header("Location: index.php?page=home");
+			exit();
+		} else {
+			$error = 'Login failed!';
+			// Redirect to login page with error
+		}mysqli_free_result($result);
+	} else {
+		die('Query execution failed: ' . mysqli_error($con));
+}
 }
 ?>
 <!DOCTYPE html>
@@ -44,6 +50,8 @@ if(isset($_POST['login_submit'])){
     <style>
 	    body{
 	    	background-image: url(img/loginpage/library_1.jpg);	
+			width: 100%;
+  			height: auto;
 	    }
     </style>
    </head>

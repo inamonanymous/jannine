@@ -1,8 +1,8 @@
 <?php
 	include('include/connection.php');
-	$query = 'SELECT * FROM `books` ORDER BY `book_id` DESC LIMIT 10';
-	$result = mysql_query($query);
-	if(mysql_num_rows($result)>0){
+	$query = 'SELECT * FROM `books_1` ORDER BY `title`  ';
+	$result = mysqli_query($con,$query);
+	if(mysqli_num_rows($result)>0){
 		$books_exist = true;
 	}else{
 		$books_exist = false;
@@ -41,22 +41,22 @@
 	      <th>Title</th>
 	      <th>Author</th>
 	      <th>ISBN No</th>
-	      <th>Category</th>
-	      <th>Bookself No.</th>
+	      <th>Recommended Age</th>
+	      <th>Price</th>
 	    </tr>
 	  </thead>
 	  <tbody>
 	  <?php
 	  if(isset($books_exist)){
 	  	if($books_exist){
-	  		while($row = mysql_fetch_array($result)){
+	  		while($row = mysqli_fetch_array($result)){
 	  ?>
 	    <tr>
 	      <td><?php echo $row['title'];?></td>
 	      <td><?php echo $row['author'];?></td>
-	      <td><?php echo $row['isbnno'];?></td>
-	      <td><?php echo $row['category'];?></td>
-	      <td><?php echo $row['bookselfno'];?></td>
+	      <td><?php echo $row['isbn'];?></td>
+	      <td><?php echo $row['recommendedAge'];?></td>
+	      <td><?php echo $row['price'];?></td>
 	    </tr>
 	   <?php
 	   		}
